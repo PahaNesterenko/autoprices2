@@ -1,10 +1,11 @@
-package test2;
+package com.example.autoprices;
 
+import com.example.autoprices.domain.Advert;
+import com.example.autoprices.domain.Auto;
+import com.example.autoprices.parser.PageParser;
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import test2.domain.Auto;
-import test2.parser.PageParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 public class App 
 {
 
-    private Integer maxPageCount = 3;
+    private Integer maxPageCount = 1;
 
     public static void main( String[] args )
     {
@@ -28,7 +29,7 @@ public class App
     private void doSomething() {
 
         PageParser pp = new PageParser();
-        List<Auto> ao = new ArrayList<>();
+        List<Advert> ao = new ArrayList<>();
         for (int i = 0 ; i < maxPageCount; ++i) {
 
 

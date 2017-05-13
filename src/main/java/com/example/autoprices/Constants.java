@@ -2,7 +2,7 @@ package com.example.autoprices;
 
 public class Constants {
 
-    public String autoProducers = "Acura\n" +
+    public static String autoProducers = "Acura\n" +
             "Adler\n" +
             "Aixam\n" +
             "Alfa Romeo\n" +
