@@ -1,12 +1,13 @@
 package com.example.autoprices;
 
 import com.example.autoprices.domain.Advert;
-import com.example.autoprices.domain.Auto;
 import com.example.autoprices.parser.PageParser;
 import lombok.SneakyThrows;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,10 @@ public class App
 
         PageParser pp = new PageParser();
         List<Advert> ao = new ArrayList<>();
+
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+        engine.eval("print('Hello World!');");
+
         for (int i = 0 ; i < maxPageCount; ++i) {
 
 

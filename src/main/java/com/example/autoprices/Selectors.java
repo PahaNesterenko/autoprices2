@@ -14,4 +14,5 @@ public static String adsection = ".ticket-item.paid";
     public static String dataState = "[data-state]";
     public static String advertId = "[data-advertisement-id]";
 
+    public static String script = "script";
 }
