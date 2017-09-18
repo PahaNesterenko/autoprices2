@@ -4,19 +4,18 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.net.URL;
+import java.util.Date;
 
 @Data
 @Entity
-public class Dealer {
+public class LevelData {
 
     @Id
     Long id;
-    String link;
-    URL logo;
-    String type;
-    String name;
-    Integer packageId;
-    Integer typeId;
+
+    Long level;
+    Integer label;
+    String hotType;
+    String expireDate;
 
 }

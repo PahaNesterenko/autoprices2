@@ -4,19 +4,17 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.net.URL;
 
 @Data
 @Entity
-public class Dealer {
+public class StateData {
 
     @Id
-    Long id;
-    String link;
-    URL logo;
-    String type;
+    Long stateId;
+    Long cityId;
     String name;
-    Integer packageId;
-    Integer typeId;
+    String regionName;
+    String linkToCatalog;
+    String title;
 
 }

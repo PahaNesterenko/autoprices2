@@ -2,6 +2,8 @@ package com.example.autoprices.parser;
 
 import com.example.autoprices.Selectors;
 import com.example.autoprices.domain.Advert;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -36,7 +38,7 @@ public class PageParser {
             List<Node> nodes = e.childNodes();
             for (Node node : nodes){
                 String nodeText = node.toString().replace("\n", "");
-                if(nodeText.contains("window.ria.server.results")) {
+                if(nodeText.contains("window.ria.server.results[")) {
                     sb.append(nodeText);
                 }
             }
@@ -50,7 +52,11 @@ public class PageParser {
         String s = sb.toString();
 
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-        Object eval = engine.eval("function foo(){ var window={};" + s + " return window.ria.server.results;} foo();");
+        Object eval = engine.eval("function foo(){ var window={};" + s + " return JSON.stringify(window.ria.server.results);} foo();");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Advert> res = objectMapper.readValue(eval.toString(), new TypeReference<Map<String, Advert>>() {});
+
 
         Map<Long, Object> map = (Map<Long, Object>) eval;
 

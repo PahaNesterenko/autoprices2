@@ -35,7 +35,7 @@ public class App
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
         engine.eval("print('Hello World!');");
 
-        for (int i = 0 ; i < maxPageCount; ++i) {
+        for (int i = 1 ; i <= maxPageCount; ++i) {
 
 
             Document doc = Jsoup.connect("https://auto.ria.com/legkovie/?page=" + i).get();

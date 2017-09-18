@@ -8,15 +8,14 @@ import java.net.URL;
 
 @Data
 @Entity
-public class Dealer {
+public class PhotoData {
 
     @Id
-    Long id;
-    String link;
-    URL logo;
-    String type;
-    String name;
-    Integer packageId;
-    Integer typeId;
+    Long Id;
+    Integer count;
+    URL seoLinkM;
+    URL seoLinkSX;
+    URL seoLinkB;
+    URL seoLinkF;
 
 }
