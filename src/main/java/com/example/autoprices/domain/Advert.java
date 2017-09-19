@@ -1,12 +1,18 @@
 package com.example.autoprices.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
+
+import com.example.autoprices.domain.deserializer.CustomCurrencyDeserializer;
+import com.example.autoprices.domain.deserializer.CustomLocalDateTimeDeserializer;
+import com.example.autoprices.domain.serializer.CustomCurrencySerializer;
+import com.example.autoprices.domain.serializer.CustomLocalDateTimeSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import lombok.Data;
 
 @Data
 @Entity
@@ -23,13 +29,25 @@ public class Advert {
     Boolean realtyExchange;
     String exchangeType;
     Integer exchangeTypeId;
-    String addDate;
-    String updateDate;
-    String expireDate;
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @JsonDeserialize(using = CustomLocalDateTimeDeserializer.class)
+    LocalDateTime addDate;
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @JsonDeserialize(using = CustomLocalDateTimeDeserializer.class)
+    LocalDateTime updateDate;
+    @JsonSerialize(using = CustomLocalDateTimeSerializer.class)
+    @JsonDeserialize(using = CustomLocalDateTimeDeserializer.class)
+    LocalDateTime expireDate;
     Boolean userHideADSStatus;
     UserPhoneData userPhoneData;
+    @JsonSerialize(using = CustomCurrencySerializer.class)
+    @JsonDeserialize(using = CustomCurrencyDeserializer.class)
     Long USD;
+    @JsonSerialize(using = CustomCurrencySerializer.class)
+    @JsonDeserialize(using = CustomCurrencyDeserializer.class)
     Long UAH;
+    @JsonSerialize(using = CustomCurrencySerializer.class)
+    @JsonDeserialize(using = CustomCurrencyDeserializer.class)
     Long EUR;
     Boolean isAutoAddedByPartner;
     Long partnerId;
