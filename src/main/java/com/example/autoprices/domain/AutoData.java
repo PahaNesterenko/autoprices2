@@ -1,5 +1,8 @@
 package com.example.autoprices.domain;
 
+import com.example.autoprices.domain.deserializer.EngineDeserializer;
+import com.example.autoprices.domain.deserializer.TransmissionDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -20,8 +23,10 @@ public class AutoData {
     Boolean withVideo;
     String race;
     Integer raceInt;
-    String fuelName;
-    String gearboxName;
+    @JsonDeserialize(using = EngineDeserializer.class)
+    Engine fuelName;
+    @JsonDeserialize(using = TransmissionDeserializer.class)
+    Transmission gearboxName;
     Boolean isSold;
     String mainCurrency;
     Boolean fromArchive;
