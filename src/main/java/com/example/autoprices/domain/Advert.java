@@ -1,9 +1,6 @@
 package com.example.autoprices.domain;
 
-import com.example.autoprices.domain.deserializer.CheckedVinDeserializer;
-import com.example.autoprices.domain.deserializer.CustomCurrencyDeserializer;
-import com.example.autoprices.domain.deserializer.CustomLocalDateTimeDeserializer;
-import com.example.autoprices.domain.deserializer.OldTopDeserializer;
+import com.example.autoprices.domain.deserializer.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
@@ -14,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties({"badges","markNameEng","modelNameEng","optionStyles"})
 public class Advert {
 
     @Id
@@ -53,12 +50,12 @@ public class Advert {
     String linkToView;
     String title;
     StateData stateData;
-    @JsonDeserialize(using = OldTopDeserializer.class)
+   // @JsonDeserialize(using = OldTopDeserializer.class)
     OldTop oldTop;
     Boolean canSetSpecificPhoneToAdvert;
     Integer dontComment;
     Integer sendComments;
-    @JsonDeserialize(using = CheckedVinDeserializer.class)
+   // @JsonDeserialize(using = CheckedVinDeserializer.class)
     CheckedVin checkedVin;
     Integer isLeasing;
     Dealer dealer;
