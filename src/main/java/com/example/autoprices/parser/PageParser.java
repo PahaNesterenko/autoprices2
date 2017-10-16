@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static com.sun.org.apache.xalan.internal.templates.Constants.ELEMNAME_SCRIPT_STRING;
 
+@Service
 public class PageParser {
 
     @SneakyThrows

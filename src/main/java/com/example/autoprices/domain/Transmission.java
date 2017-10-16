@@ -2,15 +2,13 @@ package com.example.autoprices.domain;
 
 public enum Transmission {
 
-    MANUAL(1, "Manual"),
-    SEMI_AUTOMATIC(2, "Semi-automatic"),
-    AUTOMATIC(3, "Automatic"),
-    VARIATOR(4, "Variator");
+    MANUAL("Manual"),
+    SEMI_AUTOMATIC("Semi-automatic"),
+    AUTOMATIC("Automatic"),
+    VARIATOR("Variator");
 
-    Integer id;
     String name;
-    Transmission(Integer id, String name) {
-        this.id = id;
+    Transmission(String name) {
         this.name = name;
     }
 

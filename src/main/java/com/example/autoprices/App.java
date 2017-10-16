@@ -39,7 +39,7 @@ public class App
            ao.addAll( pp.parse(doc));
         }
 
-        System.out.println("done");
+        System.out.println( ao.toString());
 
     }
 }

@@ -8,12 +8,14 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import java.io.Serializable;
 import java.time.Year;
 
 @Data
 @Entity
 //@JsonIgnoreProperties({"fuelNameEng"})
-public class AutoData {
+public class AutoData implements Serializable{
 
     @Id
     Long autoId;
@@ -26,6 +28,7 @@ public class AutoData {
     String race;
     Integer raceInt;
     @JsonDeserialize(using = EngineDeserializer.class)
+    @OneToOne(cascade= javax.persistence.CascadeType.ALL)
     Engine engine;
     String fuelNameEng;
     @JsonDeserialize(using = TransmissionDeserializer.class)

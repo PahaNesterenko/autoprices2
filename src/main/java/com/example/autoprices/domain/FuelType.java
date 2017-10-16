@@ -2,16 +2,14 @@ package com.example.autoprices.domain;
 
 public enum FuelType {
 
-    PETROL(1, "Petrol"),
-    DIESEL(2, "Diesel"),
-    GASPETROL(3, "Gas/Petrol"),
-    ELECTRIC(4, "Electric");
+    PETROL("Petrol"),
+    DIESEL("Diesel"),
+    GASPETROL("Gas/Petrol"),
+    ELECTRIC("Electric");
 
-    Integer id;
     String name;
 
-    FuelType(Integer id, String name){
-        this.id = id;
+    FuelType( String name){
         this.name = name;
     }
 
