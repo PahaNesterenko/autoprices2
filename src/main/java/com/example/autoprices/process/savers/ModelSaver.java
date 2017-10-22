@@ -4,7 +4,9 @@ import com.example.autoprices.domain.Advert;
 import com.example.autoprices.domain.Model;
 import com.example.autoprices.persistance.ModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ModelSaver implements Saver {
 
     @Autowired
@@ -12,7 +14,7 @@ public class ModelSaver implements Saver {
 
     @Override
     public Advert save(Advert advert) {
-        if (modelRepository.getByName(advert.getModelName()) != null) {
+        if (modelRepository.getByName(advert.getModelName()) == null) {
             modelRepository.save(new Model(advert.getModelId(), advert.getModelName()));
         }
 

@@ -2,10 +2,7 @@ package com.example.autoprices.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.net.URL;
 
@@ -14,11 +11,11 @@ import java.net.URL;
 public class Dealer implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     String link;
     URL logo;
     String type;
+    @Column(unique=true)
     String name;
     Integer packageId;
     Integer typeId;

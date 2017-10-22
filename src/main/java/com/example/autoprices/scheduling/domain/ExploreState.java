@@ -17,6 +17,13 @@ public class ExploreState implements Serializable{
     Long pageNumber;
     LocalDateTime created;
 
+    public ExploreState(Long currentPage) {
+        this.pageNumber = currentPage;
+    }
+
+    public ExploreState() {
+    }
+
     @PrePersist
     void createdAt() {
         this.created = LocalDateTime.now();

@@ -42,10 +42,10 @@ public class ExploreAdvertsJob {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 5000) //fixedRate = 5000  cron="0 08 * * * *"
+    @Scheduled(fixedRate = 20000) //fixedRate = 5000  cron="0 08 * * * *"
     @SneakyThrows
     public void reportCurrentTime() {
-        log.info("The time is now {}", dateFormat.format(new Date()));
+        log.info("Start exploring job - ", dateFormat.format(new Date()));
 
         ExploreState lastStatus = exploreStateRepository.findFirstByOrderByIdDesc();
 
@@ -58,6 +58,11 @@ public class ExploreAdvertsJob {
         List<Advert> parsed = pageParser.parse(doc);
 
         advertProcess.save(parsed);
+
+        exploreStateRepository.save(new ExploreState(currentPage));
+
+        log.info("End exploring job - ", dateFormat.format(new Date()));
+//TODO save to job status some info number of adverts, was it successful...
 
     }
 

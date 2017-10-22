@@ -14,7 +14,7 @@ public class MarkSaver implements Saver {
 
     @Override
     public Advert save(Advert advert) {
-        if(markRepository.getByName(advert.getMarkName()) != null) {
+        if(markRepository.getByName(advert.getMarkName()) == null) {
             markRepository.save(new Mark(advert.getMarkId(), advert.getMarkName()));
         }
 
