@@ -8,20 +8,25 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class ExploreState implements Serializable{
+public class ExploreResult implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     Long pageNumber;
+    Long previousPageNumber;
     LocalDateTime created;
+    Boolean random = false;
+    Boolean successful = true;
+    String errorReason;
+    Integer advertCount;
 
-    public ExploreState(Long currentPage) {
+    public ExploreResult(Long currentPage) {
         this.pageNumber = currentPage;
     }
 
-    public ExploreState() {
+    public ExploreResult() {
     }
 
     @PrePersist

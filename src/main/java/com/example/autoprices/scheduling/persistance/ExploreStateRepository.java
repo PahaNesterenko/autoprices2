@@ -1,10 +1,10 @@
 package com.example.autoprices.scheduling.persistance;
 
-import com.example.autoprices.scheduling.domain.ExploreState;
+import com.example.autoprices.scheduling.domain.ExploreResult;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ExploreStateRepository extends CrudRepository<ExploreState, Long> {
+public interface ExploreStateRepository extends CrudRepository<ExploreResult, Long> {
 
-    ExploreState findFirstByOrderByIdDesc();
+    ExploreResult findFirstByOrderByIdDesc();
 
 }

@@ -26,6 +26,11 @@ public class DealerSaver implements Saver {
             } else {
                 advert.setDealer(null);
             }
+        } else{
+            Dealer saved = dealerRepository.findOne(dealer.getId());
+            if(saved != null) {
+                advert.setDealer(saved);
+            }
         }
 
         return advert;

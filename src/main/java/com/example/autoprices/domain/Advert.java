@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -19,6 +16,8 @@ import java.time.LocalDateTime;
 public class Advert implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long localId;
     Long id;
     Long userId;
     Integer chipsCount;

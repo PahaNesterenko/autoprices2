@@ -7,6 +7,7 @@ import com.example.autoprices.persistance.AdvertRepository;
 import com.example.autoprices.persistance.MarkRepository;
 import com.example.autoprices.persistance.ModelRepository;
 import com.example.autoprices.process.savers.Saver;
+import com.example.autoprices.scheduling.domain.ExploreResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,20 +29,18 @@ public class AdvertProcess {
     @Autowired
     private ModelRepository modelRepository;
 
-    public Iterable<Advert> save(List<Advert> adverts){
+    public Iterable<Advert> processAdverts(List<Advert> adverts, ExploreResult currentStatus){
+
+        processStatus(adverts, currentStatus);
 
         return adverts.stream().peek(this::saveAdvert).collect(Collectors.toList());
     }
 
+    private void processStatus(List<Advert> adverts, ExploreResult currentStatus) {
+        currentStatus.setAdvertCount(adverts.size());
+    }
+
     private Advert saveAdvert(Advert advert) {
-        /*Mark mark = new Mark(advert.getMarkId(), advert.getMarkName());
-        if(markRepository.getByName(mark.getName()) != null){
-            markRepository.save(mark);
-        }
-        Model model = new Model(advert.getModelId(), advert.getModelName());
-        if(modelRepository.getByName(model.getName()) != null){
-            modelRepository.save(model);
-        }*/
 
         savers.forEach(saver -> saver.save(advert));
 
@@ -49,19 +48,6 @@ public class AdvertProcess {
 
 
 
-    }
-
-    //TODO continue with savers
-    private void saveMiscellaneous(List<Advert> adverts) {
-        List<Mark> marks = adverts.stream()
-                .map(advert -> new Mark(advert.getMarkId(), advert.getMarkName())).distinct().collect(Collectors.toList());
-
-        markRepository.save(marks);
-
-        List<Model> models = adverts.stream()
-                .map(advert -> new Model(advert.getModelId(), advert.getModelName())).distinct().collect(Collectors.toList());
-
-        modelRepository.save(models);
     }
 
 }

@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Year;
 
@@ -18,6 +16,8 @@ import java.time.Year;
 public class AutoData implements Serializable{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long localId;
     Long autoId;
     String description;
     String version;
