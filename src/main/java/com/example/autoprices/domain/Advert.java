@@ -34,7 +34,7 @@ public class Advert implements Serializable {
     @JsonDeserialize(using = CustomLocalDateTimeDeserializer.class)
     LocalDateTime expireDate;
     Boolean userHideADSStatus;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     UserPhoneData userPhoneData;
     @JsonDeserialize(using = CustomCurrencyDeserializer.class)
     Long USD;
@@ -56,7 +56,7 @@ public class Advert implements Serializable {
     PhotoData photoData;
     String linkToView;
     String title;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     StateData stateData;
     @OneToOne(cascade = CascadeType.ALL)
     //@JsonDeserialize(using = OldTopDeserializer.class)
@@ -68,7 +68,7 @@ public class Advert implements Serializable {
     //@JsonDeserialize(using = CheckedVinDeserializer.class)
     CheckedVin checkedVin;
     Integer isLeasing;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     Dealer dealer;
     Boolean withInfoBar;
     String infoBarText;

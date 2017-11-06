@@ -11,6 +11,8 @@ import java.net.URL;
 public class Dealer implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long local_id;
     Long id;
     String link;
     URL logo;

@@ -15,10 +15,10 @@ public class ExploreResult implements Serializable{
     Long id;
 
     Long pageNumber;
-    Long previousPageNumber;
     LocalDateTime created;
     Boolean random = false;
     Boolean successful = true;
+    @Column(length=512)
     String errorReason;
     Integer advertCount;
 

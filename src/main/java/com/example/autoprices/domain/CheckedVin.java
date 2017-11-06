@@ -17,6 +17,7 @@ public class CheckedVin implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
     String vin;
     Boolean isShow;
     String linkToReport;

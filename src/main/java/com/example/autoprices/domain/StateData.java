@@ -2,8 +2,7 @@ package com.example.autoprices.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
@@ -11,6 +10,9 @@ import java.io.Serializable;
 public class StateData implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    @Column(unique = true)
     Long cityId;
     Long stateId;
     String name;

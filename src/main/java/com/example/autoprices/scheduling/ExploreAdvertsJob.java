@@ -20,7 +20,6 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ExploreAdvertsJob {
@@ -42,21 +41,26 @@ public class ExploreAdvertsJob {
     @Autowired
     private PageParser pageParser;
 
-    ExploreResult currentStatus = new ExploreResult();
+    private ExploreResult currentStatus;
+
+    private static int counter = 0;
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 20000) //fixedRate = 5000  cron="0 08 * * * *"
+    @Scheduled(fixedDelayString = "${job.execution.delay}") //fixedDelay = 5000 fixedRate = 5000  cron="0 08 * * * *"
     @SneakyThrows
     public void explore() {
         log.info("Start exploring job - ", dateFormat.format(new Date()));
         try {
-            Document doc = Jsoup.connect(riaURL + getPageNumberToProcess()).get();
+            currentStatus = new ExploreResult();
+            Long pageNumberToProcess = getPageNumberToProcess(currentStatus);
+            currentStatus.setPageNumber(pageNumberToProcess);
+            Document doc = Jsoup.connect(riaURL + pageNumberToProcess).get();
             List<Advert> parsed = pageParser.parse(doc);
             advertProcess.processAdverts(parsed, currentStatus);
         } catch (Exception e) {
             currentStatus.setSuccessful(false);
-           // currentStatus.setErrorReason(e.getLocalizedMessage());
+            currentStatus.setErrorReason(e.getLocalizedMessage());
         }
 
         exploreStateRepository.save(currentStatus);
@@ -64,29 +68,18 @@ public class ExploreAdvertsJob {
         log.info("End exploring job - ", dateFormat.format(new Date()));
     }
 
-    private Long getPageNumberToProcess() {
-        ExploreResult lastStatus = exploreStateRepository.findFirstByOrderByIdDesc();
-        if (lastStatus != null) {
-            currentStatus.setPreviousPageNumber(lastStatus.getPageNumber());
-        } else {
-            currentStatus.setPreviousPageNumber(1L);
-        }
-        return Optional.ofNullable(lastStatus).map(this::calculateNextPageNumber).orElse(1L);
-    }
+    private Long getPageNumberToProcess(ExploreResult currentStatus) {
+        ExploreResult lastStatus = exploreStateRepository.findFirstByRandomFalseOrderByIdDesc();
 
-    private Long calculateNextPageNumber(ExploreResult lastResult) {
-        // Every third page number will be random
-        Long number;
-        if (lastResult.getId() % 3 == 0) {
-            currentStatus.setRandom(true);
-            number = RandomUtils.nextLong(0, 100);
-        } else if (lastResult.getRandom()) {
-            number = lastResult.getPreviousPageNumber();
-        } else {
-            number = lastResult.getId() + 1;
+        if(lastStatus == null){
+            return 1L;
         }
-        currentStatus.setPageNumber(number);
-        return number;
+        if(counter++ % 3 == 0){
+            currentStatus.setRandom(true);
+            return RandomUtils.nextLong(0, 100);
+        }
+
+        return lastStatus.getPageNumber() + 1;
     }
 
 }

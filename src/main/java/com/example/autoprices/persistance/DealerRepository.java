@@ -7,5 +7,6 @@ public interface DealerRepository extends CrudRepository<Dealer, Long> {
 
     Dealer getByLink(String link);
     Dealer getByName(String name);
+    Dealer findById(Long id);
 
 }

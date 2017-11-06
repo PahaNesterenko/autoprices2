@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ExploreStateRepository extends CrudRepository<ExploreResult, Long> {
 
-    ExploreResult findFirstByOrderByIdDesc();
+    ExploreResult findFirstByRandomFalseOrderByIdDesc();
 
 }
